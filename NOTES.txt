@@ -1,0 +1,26 @@
+# INSTRUCTIONS FOR DEVELOPER ON MACOS
+brew install python@3.9
+python3.9 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+
+
+# TEST PYPI BUILD
+python setup.py sdist bdist_wheel
+twine upload --repository testpypi dist/*
+
+
+
+# GOOGLE COLAB START
+!pip uninstall -y tsitools
+!pip install --index-url https://test.pypi.org/simple/ tsitools
+from google.colab import drive
+import os
+drive.mount('/content/drive')
+os.chdir('/content/drive/My Drive/google_Colab')
+
+
+
+# GENERATE DOCUMENTATION
+jupyter nbconvert --to markdown README.ipynb
